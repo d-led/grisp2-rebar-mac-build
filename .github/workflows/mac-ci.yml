@@ -6,6 +6,7 @@ jobs:
     name: Grisp Toolchain Installation and Deployment Test
     runs-on: macos-latest
     strategy:
+        fail-fast: false
         matrix:
           otp: ['25', '26']
 
