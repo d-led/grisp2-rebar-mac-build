@@ -35,6 +35,6 @@ jobs:
         #     DIAGNOSTIC: 0
         #     DEBUG: 0
         run: |
-            ./scripts/patch-version ${{matrix.otp}}
+            ./scripts/patch-otp-version ${{matrix.otp}}
             rebar3 compile
             rebar3 grisp deploy --force
