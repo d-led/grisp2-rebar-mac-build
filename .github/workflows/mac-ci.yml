@@ -1,0 +1,33 @@
+name: MacOS CI
+on: [push]
+
+jobs:
+  deploy-test:
+    name: Grisp Toolchain Installation and Deployment Test
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install Erlang and dependencies
+        run: |
+            brew install erlang@25
+            brew link erlang@25
+            curl -o /usr/local/bin/rebar3 https://s3.amazonaws.com/rebar3/rebar3
+            chmod +x /usr/local/bin/rebar3
+
+            mkdir -p ~/.config/rebar3
+            rebar_config=$(cat << EOF
+            {plugins, [
+                rebar3_hex,
+                rebar3_grisp
+            ]}.
+            EOF
+            )
+            cat "$rebar_config" > ~/.config/rebar3/rebar.config
+            
+      - name: Compile and Deploy
+        run: |
+            DIAGNOSTIC=1 DEBUG=1 rebar3 compile
+            DIAGNOSTIC=1 DEBUG=1 rebar3 grisp deploy
