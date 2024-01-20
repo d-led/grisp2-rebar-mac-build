@@ -28,6 +28,9 @@ jobs:
             echo "$rebar_config" > ~/.config/rebar3/rebar.config
             
       - name: Compile and Deploy
+        env:
+            DIAGNOSTIC: 0
+            DEBUG: 0
         run: |
-            DIAGNOSTIC=1 DEBUG=1 rebar3 compile
-            DIAGNOSTIC=1 DEBUG=1 rebar3 grisp deploy --force
+            rebar3 compile
+            rebar3 grisp deploy --force
