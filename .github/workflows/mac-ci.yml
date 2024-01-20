@@ -25,7 +25,7 @@ jobs:
             ]}.
             EOF
             )
-            cat "$rebar_config" > ~/.config/rebar3/rebar.config
+            echo "$rebar_config" > ~/.config/rebar3/rebar.config
             
       - name: Compile and Deploy
         run: |
