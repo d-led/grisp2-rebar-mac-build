@@ -5,6 +5,9 @@ jobs:
   deploy-test:
     name: Grisp Toolchain Installation and Deployment Test
     runs-on: macos-latest
+    strategy:
+        matrix:
+          otp: ['25', '26']
 
     steps:
       - name: Checkout
@@ -12,8 +15,8 @@ jobs:
 
       - name: Install Erlang and dependencies
         run: |
-            brew install erlang@25
-            brew link erlang@25
+            brew install erlang@${{matrix.otp}}
+            brew link erlang@${{matrix.otp}}
             curl -o /usr/local/bin/rebar3 https://s3.amazonaws.com/rebar3/rebar3
             chmod +x /usr/local/bin/rebar3
 
@@ -32,5 +35,6 @@ jobs:
         #     DIAGNOSTIC: 0
         #     DEBUG: 0
         run: |
+            ./scripts/patch-version ${{matrix.otp}}
             rebar3 compile
             rebar3 grisp deploy --force
