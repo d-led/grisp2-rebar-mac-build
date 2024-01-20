@@ -1,0 +1,8 @@
+#!/usr/bin/env escript
+main([Version]) ->
+    Filename = "rebar.config",
+    io:format("version to patch to: ~p~n", [Version]),
+    {ok, Orig}=file:read_file(Filename),
+    Replaced = re:replace(Orig, "version,\s*\"[^\"]+\"", "version, \""++Version++"\""),
+    file:write_file(Filename, [Replaced]),
+    ok.
