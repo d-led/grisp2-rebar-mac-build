@@ -55,3 +55,25 @@ rebar3.crashdump
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/erlang,visualstudiocode,elixir
+
+.rebar3
+_*
+.eunit
+*.o
+*.beam
+*.plt
+*.swp
+*.swo
+.erlang.cookie
+ebin
+log
+erl_crash.dump
+.rebar
+logs
+_build
+.idea
+rebar3.crashdump
+
+# GRiSP
+_grisp
+tmp/

@@ -30,4 +30,4 @@ jobs:
       - name: Compile and Deploy
         run: |
             DIAGNOSTIC=1 DEBUG=1 rebar3 compile
-            DIAGNOSTIC=1 DEBUG=1 rebar3 grisp deploy
+            DIAGNOSTIC=1 DEBUG=1 rebar3 grisp deploy --force
